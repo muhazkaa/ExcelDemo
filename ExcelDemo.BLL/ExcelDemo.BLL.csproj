@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Data.OleDb" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ExcelDemo.Contracts\ExcelDemo.Contracts.csproj" />
+    <ProjectReference Include="..\ExcelDemo.Core\ExcelDemo.Core.csproj" />
+  </ItemGroup>
+
+</Project>
