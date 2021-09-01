@@ -78,7 +78,7 @@ namespace ExcelDemo.Controllers
                     return Ok(a);
                 }
                 else
-                    return BadRequest(new { success = false, error = "file excel not found" });
+                    return Ok(new List<string>());
             }
             catch (Exception ex)
             {

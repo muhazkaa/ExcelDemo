@@ -57,31 +57,48 @@ var datatables = {
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
-                    dataset = data.slice(0);
-                    $.each(dataset[0], function (key, value) {
-                        
-                        var my_item = {};
-                        my_item.data = key;
-                        my_item.title = key;
-                        my_columns.push(my_item);
-                    });
-                    $.each(dataset, function (key, value) {
-                        Object.keys(value).forEach(function (key) {
-                            if (jQuery.isEmptyObject(value[key])) {
-                                value[key] = '';
-                            }
-                        })
+                    
+                    if (data.length > 0) {
+                        dataset = data.slice(0);
+                        $.each(dataset[0], function (key, value) {
 
-                    });
+                            var my_item = {};
+                            my_item.data = key;
+                            my_item.title = key;
+                            my_columns.push(my_item);
+                        });
+                        $.each(dataset, function (key, value) {
+                            Object.keys(value).forEach(function (key) {
+                                if (jQuery.isEmptyObject(value[key])) {
+                                    value[key] = '';
+                                }
+                            })
+
+                        });
+
+                        datatable = $('#datatable').DataTable({
+                            destroy: true,
+                            data: dataset,
+                            ordering: false,
+                            columns: my_columns
+                        });
+                    } else {
+                        var my_item = {};
+                        my_item.data = '';
+                        my_item.title = '';
+                        my_columns.push(my_item);
+
+                        datatable = $('#datatable').DataTable({
+                            destroy: true,
+                            ordering: false,
+                            columns: my_columns
+                        });
+                    }
                     
                 }
+
             });
-            datatable = $('#datatable').DataTable({
-                destroy: true,
-                data: dataset,
-                ordering: false,
-                columns: my_columns
-            });
+           
         }
         catch (e) {
             console.log(e);
